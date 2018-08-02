@@ -1,0 +1,26 @@
+# - Config file for the uws package
+# It defines the following variables
+#  uws_INCLUDE_DIRS - include directories for uws
+#  uws_LIBRARIES    - libraries to link against
+#  uws_EXECUTABLE   - the test executable
+
+# Compute paths
+get_filename_component(uws_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(CMakeFindDependencyMacro)
+
+find_package(LibUV)
+find_package(Threads REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_search_module(OPENSSL REQUIRED openssl)
+find_package(ZLIB REQUIRED)
+
+set(uws_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+# This library dependencies (contains definitions for IMPORTED targets)
+if(NOT TARGET uws AND NOT uws_BINARY_DIR)
+    include_directories("${uws_CMAKE_DIR}/uws")
+    include("${uws_CMAKE_DIR}/uwsTargets.cmake")
+endif()
+
+## These are IMPORTED targets created by uwsTargets.cmake
+#set(uws_LIBRARIES uws::uws)

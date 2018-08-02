@@ -1,0 +1,4 @@
+#define uws_MAJOR_VERSION (@uws_MAJOR_VERSION@)
+#define uws_MINOR_VERSION (@uws_MINOR_VERSION@)
+#define uws_PATCH_VERSION (@uws_PATCH_VERSION@)
+#define uws_VERSION_STRING (@uws_VERSION@)

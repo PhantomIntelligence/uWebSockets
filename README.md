@@ -1,42 +1,46 @@
-<div align="center"><img src="misc/images/logo.png"/></div>
+# uws  -  µWebSocket, *à la* Phantom
 
-µWS ("[micro](https://en.wikipedia.org/wiki/Micro-)WS") is a WebSocket and HTTP implementation for clients and servers. Simple, efficient and lightweight.
+This repo is an adaptation of [µWebSocket](https://github.com/uNetworking/uWebSockets).  
+It has been made to enable the compilation of uws with CMake, which is no longer supported by the author.  
+[This post](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/) has been a very useful resource during the adaptation.  
 
-[Wiki pages & user manual](https://github.com/uNetworking/uWebSockets/wiki/User-manual-v0.14.x) | [Care for a sneak peek?](https://github.com/uNetworking/v0.15)
+## Dependencies  
 
-#### Build optimized WebSocket & HTTP servers & clients in no time.
-```c++
-#include <uWS/uWS.h>
-using namespace uWS;
+Note that this project has some dependencies:  
+  * cmake    
+  * libuv  
+  * pthread  
+  * pkgConfig  
+  * openssl  
+  * zlib  
 
-int main() {
-    Hub h;
-    std::string response = "Hello!";
 
-    h.onMessage([](WebSocket<SERVER> *ws, char *message, size_t length, OpCode opCode) {
-        ws->send(message, length, opCode);
-    });
+## Installation  
 
-    h.onHttpRequest([&](HttpResponse *res, HttpRequest req, char *data, size_t length,
-                        size_t remainingBytes) {
-        res->end(response.data(), response.length());
-    });
-
-    if (h.listen(3000)) {
-        h.run();
-    }
-}
+First, make sure all the dependencies are installed.  
+1. Download the project  
+2. In the base `uws/` directory, run :    
 ```
+mkdir cmake-build-debug  
+cd cmake-build-debug  
+cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - UnixMakefile" ..  
+make && sudo make install  
+```  
 
-#### Pay what you want.
-A free & open source ([Zlib](LICENSE)) hobby project of [mine](https://github.com/alexhultman) since 2016. Kindly sponsored by [BitMEX](https://bitmex.com), [Bitfinex](https://bitfinex.com) & [Coinbase](https://www.coinbase.com/) in 2018.
+## Integration in other CMake projects
+If everything goes according to plan, you should then be able to include the `uws` by adding this to your `CMakeLists.txt`:  
+```
+find_package(uws CONFIG REQUIRED)
+if (uws_FOUND)
+    message(STATUS "Found uWS")
+    message(STATUS "LIBRARIES ${uws_LIBRARIES}")
+    message(STATUS "INCLUDE_DIRS ${uws_INCLUDE_DIRS}")
+else ()
+    message(FATAL "uWS is required")
+endif ()
 
-<div align="center"><img src="misc/images/2018.png"/></div>
+include_directories(${uws_INCLUDE_DIRS})
 
-*Understand I don't take issue reports, suggestions or provide any support to free-riders. You want in? Become a sponsor.*
+target_link_libraries(**YOUR TARGET NAME HERE!!**  ${uws_LIBRARIES})
 
-#### Excel across the board.
-<div align="center"><img src="misc/images/overview.png"/></div>
-
-#### Be fast, not broken.
-Gracefully passes the [entire Autobahn fuzzing test suite](http://htmlpreview.github.io/?https://github.com/uNetworking/uWebSockets/blob/master/misc/autobahn/index.html) with no failures or Valgrind/ASAN errors. With or without SSL/permessage-deflate.
+```
