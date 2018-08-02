@@ -83,4 +83,4 @@ target_link_libraries(**YOUR TARGET NAME HERE!!**  uws)
 ```
 
 ## License
-
+Apache-2.0
