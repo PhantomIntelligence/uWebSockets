@@ -3,8 +3,9 @@ cmake_minimum_required(VERSION 3.8)
 set(PROJECT_NAME uws)
 
 project(${PROJECT_NAME} CXX)
-
 include(GNUInstallDirs)
+
+# Integration of cmake macros and custom functions
 include(cmake-module/setupCMakeMacros.cmake)
 setup_cmake_macros(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 

@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 2.8.2 FATAL_ERROR)
+project(uws-download NONE)
+
+include(ExternalProject)
+ExternalProject_Add(
+        uws
+        SOURCE_DIR "@UWS_DOWNLOAD_ROOT@/uws-src"
+        BINARY_DIR "@UWS_DOWNLOAD_ROOT@/uws-build"
+        GIT_REPOSITORY https://github.com/PhantomIntelligence/uws.git
+        GIT_TAG master
+        INSTALL_COMMAND   ""
+        TEST_COMMAND      ""
+)
