@@ -50,8 +50,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lpthread -O3")
 add_subdirectory(uws)
 #add_subdirectory(example)
 
-# Options:  Add flag -BUILD_TESTS to build the tests
-option(BUILD_TESTS "Build tests." ON)
 option(ENABLE_CPP11 "Build ${PROJECT_NAME} with C++11 features enabled" TRUE)
 
 # Add all targets to the build-tree export set
