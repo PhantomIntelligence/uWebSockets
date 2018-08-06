@@ -30,6 +30,6 @@ macro(fetch_uws _download_module_path _download_root)
     )
 
     set_property(TARGET uws APPEND_STRING PROPERTY COMPILE_FLAGS " -std=c++11 -O3")
-    message(STATUS " Done with uws")
+    message(STATUS "Done with uws")
     message(STATUS)
 endmacro()
