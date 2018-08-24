@@ -61,7 +61,7 @@ target_link_libraries(${PROJECT_NAME} ... uws)
 ```
 mkdir cmake-build-debug
 cd cmake-build-debug
-cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - UnixMakefile" ..
+cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" ..
 make && sudo make install
 ```
 #### Integration in other CMake projects
